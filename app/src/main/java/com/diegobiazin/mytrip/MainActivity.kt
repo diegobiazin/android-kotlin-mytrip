@@ -20,6 +20,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
 
         buttonCalculate.setOnClickListener(this)
+
+        //tratamento para compreender o textResult após alterar a orientação para landscape
+        if (savedInstanceState != null) {
+            textResult.text = savedInstanceState.getString("resultado")
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putString("resultado", textResult.text.toString())
     }
 
     private fun handleCalculate() {
